@@ -229,20 +229,39 @@
     });
     
     webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
-    setTimeout(() => {
-        const windows = document.querySelectorAll('#webamp .window');
+    console.log('Webamp loaded, attempting to position...');
+    
+    let attempts = 0;
+    const positionInterval = setInterval(() => {
+        const windows = document.querySelectorAll('.webamp .window, #webamp .window');
         
-        windows.forEach((window, index) => {
-            // Position main player in center of content area
-            if (index === 0) {  // Main player
-                window.style.left = '900px';
-                window.style.top = '300px';
-            } else {  // Equalizer and playlist - hide them off-screen
-                window.style.left = '-5000px';
-                window.style.top = '-5000px';
+        console.log('Attempt', attempts, 'found', windows.length, 'windows');
+        
+        if (windows.length > 0) {
+            windows.forEach((win, index) => {
+                console.log('Positioning window', index);
+                
+                if (index === 0) {  // Main player
+                    win.style.left = '700px';
+                    win.style.top = '300px';
+                    win.style.position = 'fixed';
+                } else if (index === 1) {  // Equalizer
+                    win.style.left = '700px';
+                    win.style.top = '420px';  // Below main player (300 + 116 + 4px gap)
+                    win.style.position = 'fixed';
+                } else if (index === 2) {  // Playlist
+                    win.style.left = '700px';
+                    win.style.top = '540px';  // Below equalizer
+                    win.style.position = 'fixed';
+                }
+            });
+            
+            attempts++;
+            if (attempts > 10) {
+                clearInterval(positionInterval);
             }
-        });
-    }, 500);  // Wait longer for everything to load
+        }
+    }, 100);
 });
 </script>
 
