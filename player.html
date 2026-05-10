@@ -229,22 +229,21 @@
     });
     
     webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
-        // Wait a moment for everything to fully render
-        setTimeout(() => {
-            // Get the container position
-            const container = document.getElementById('webamp');
-            const rect = container.getBoundingClientRect();
-            
-            // Find all Webamp windows
-            const windows = document.querySelectorAll('#webamp .window');
-            
-            windows.forEach(window => {
-                // Position each window in the center of the container
-                window.style.left = (rect.left + rect.width / 2 - 137) + 'px';  // 275px player width / 2
-                window.style.top = (rect.top + 50) + 'px';  // 50px from top of container
-            });
-        }, 100);
-    });
+    setTimeout(() => {
+        const windows = document.querySelectorAll('#webamp .window');
+        
+        windows.forEach((window, index) => {
+            // Position main player in center of content area
+            if (index === 0) {  // Main player
+                window.style.left = '900px';
+                window.style.top = '300px';
+            } else {  // Equalizer and playlist - hide them off-screen
+                window.style.left = '-5000px';
+                window.style.top = '-5000px';
+            }
+        });
+    }, 500);  // Wait longer for everything to load
+});
 </script>
 
 </body>
