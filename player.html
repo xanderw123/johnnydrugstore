@@ -210,7 +210,7 @@
 <script>
     const webamp = new Webamp({
         initialSkin: {
-            url: "/skins/XW_VIDEO_PLAYER_SKIN.wsz"
+            url: "/skins/XW_VIDEO_PLAYER_SKIN.wsz"  // or your CDN URL
         },
         initialTracks: [
             {
@@ -220,20 +220,17 @@
                 },
                 url: "/audio/mix-01.mp3"
             }
-        ],
-        __initialWindowLayout: {
-            main: { 
-                position: { 
-                    x: window.innerWidth / 2 - 137,  // 275px player width / 2
-                    y: 200  // Adjust this to move it up/down
-                } 
-            },
-            equalizer: { position: { x: 0, y: 0 }, closed: true },
-            playlist: { position: { x: 0, y: 0 }, closed: true }
-        }
+        ]
     });
     
-    webamp.renderWhenReady(document.getElementById('webamp'));
+    webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
+        // Center the player after it loads
+        const mainWindow = document.querySelector('#webamp .window');
+        if (mainWindow) {
+            mainWindow.style.position = 'relative';
+            mainWindow.style.margin = '0 auto';
+        }
+    });
 </script>
 
 </body>
