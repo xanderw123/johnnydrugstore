@@ -226,10 +226,25 @@
                 url: "/audio/mix-01.mp3"
             }
         ]
-        // No __initialWindowLayout - let it position naturally
     });
     
-    webamp.renderWhenReady(document.getElementById('webamp'));
+    webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
+        // Wait a moment for everything to fully render
+        setTimeout(() => {
+            // Get the container position
+            const container = document.getElementById('webamp');
+            const rect = container.getBoundingClientRect();
+            
+            // Find all Webamp windows
+            const windows = document.querySelectorAll('#webamp .window');
+            
+            windows.forEach(window => {
+                // Position each window in the center of the container
+                window.style.left = (rect.left + rect.width / 2 - 137) + 'px';  // 275px player width / 2
+                window.style.top = (rect.top + 50) + 'px';  // 50px from top of container
+            });
+        }, 100);
+    });
 </script>
 
 </body>
