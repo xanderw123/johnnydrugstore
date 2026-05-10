@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Johnny Drugstore - Media Player</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .side-column {
+            width: 100px;
+            background-color: #000000;
+            background-image: url('images/side-tile.gif');
+            background-repeat: repeat-y;
+        }
+        
+        .header {
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ffffff;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-style: italic;
+            font-weight: 700;
+            color: #ff3399;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        
+        .header .tagline {
+            font-size: 11px;
+            color: #ffffff;
+            margin: 8px 0 0 0;
+        }
+        
+        .sidebar {
+            width: 150px;
+            background-color: #000000;
+            padding: 15px;
+            border: 1px solid #ffffff;
+            vertical-align: top;
+        }
+        
+        .sidebar h3 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff3399;
+            margin: 0 0 5px 0;
+        }
+        
+        .sidebar hr {
+            border: none;
+            border-top: 1px solid #ff3399;
+            margin: 5px 0 15px 0;
+        }
+        
+        .sidebar hr.thin {
+            border-top: 1px solid #ffffff;
+            opacity: 0.3;
+            margin: 20px 0;
+        }
+        
+        .sidebar p {
+            font-size: 11px;
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        .sidebar a:hover {
+            color: #ff3399;
+        }
+        
+        .sidebar .current {
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .sidebar .status-dot {
+            color: #ff3399;
+            font-size: 10px;
+        }
+        
+        .sidebar .counter {
+            background-color: #000000;
+            border: 1px solid #ffffff;
+            padding: 5px;
+            text-align: center;
+            margin-top: 8px;
+        }
+        
+        .sidebar .counter span {
+            font-family: "Courier New", monospace;
+            font-size: 9px;
+            color: #ff3399;
+        }
+        
+        .main-content {
+            background-color: #000000;
+            padding: 60px 40px;
+            border: 1px solid #ffffff;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .player-container {
+            margin: 40px auto;
+            display: inline-block;
+        }
+        
+        .footer {
+            background-color: #000000;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ffffff;
+        }
+        
+        .footer p {
+            font-size: 8px;
+            color: #666666;
+            margin: 3px 0;
+            line-height: 1.5;
+        }
+        
+        .footer a {
+            color: #666666;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: #ff3399;
+        }
+    </style>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="side-column">&nbsp;</td>
+        
+        <td width="800">
+            <table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td colspan="2" class="header">
+                        <h1>Johnny Drugstore</h1>
+                        <p class="tagline">The Number 1 Broadcast in all of the Nine Cities</p>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="sidebar">
+                        <h3>NAVIGATION</h3>
+                        <hr>
+                        <p><a href="index.html">HOME</a></p>
+                        <p><a href="stream.html">STREAM</a></p>
+                        <p class="current">PLAYER</p>
+                        <p><a href="store.html">STORE</a></p>
+                        <p><a href="guestbook.html">GUESTBOOK</a></p>
+                        
+                        <hr class="thin">
+                        
+                        <h3>STATUS</h3>
+                        <hr>
+                        <p class="status-dot">● LIVE 24/7</p>
+                        
+                        <hr class="thin">
+                        
+                        <h3>VISITORS</h3>
+                        <hr>
+                        <div class="counter">
+                            <span>999,999,999</span>
+                        </div>
+                    </td>
+                    
+                    <td class="main-content">
+                        <div class="player-container">
+                            <div id="webamp"></div>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="footer">
+                        <p>Johnny Drugstore is property of <a href="https://xwindustries.net">XW Industries</a></p>
+                        <p>Copyright © 1997. All Rights Reserved.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        
+        <td class="side-column">&nbsp;</td>
+    </tr>
+</table>
+
+<!-- Load Webamp -->
+<script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
+
+<script>
+    const webamp = new Webamp({
+        initialSkin: {
+            url: "https://skins.webamp.org/skin/6532fc61c5f8b7af4f9ce58c4f7603d6/XW_VIDEO_PLAYER_SKIN%20copy.wsz/" 
+        },
+        initialTracks: [
+            {
+                metaData: {
+                    artist: "JOHNNY DRUGSTORE",
+                    title: "broadcast"
+                },
+                url: "/audio/mix-01.mp3"
+                // duration: 5400  // add duration in seconds if you know it
+            }
+        ],
+        __initialWindowLayout: {
+            main: { position: { x: 0, y: 0 } },
+            equalizer: { position: { x: 0, y: 116 }, closed: true },
+            playlist: { position: { x: 0, y: 116 }, closed: true }
+        }
+    });
+    
+    webamp.renderWhenReady(document.getElementById('webamp'));
+</script>
+
+</body>
+</html>
