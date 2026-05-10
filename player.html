@@ -210,6 +210,20 @@
     </tr>
 </table>
 
+<style>
+    /* ... all your existing styles ... */
+    
+    /* Hide Webamp until it's positioned */
+    #webamp {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    #webamp.positioned {
+        opacity: 1;
+    }
+</style>
+
 <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
 
 <script>
@@ -224,39 +238,21 @@
                     title: "broadcast"
                 },
                 url: "/audio/mix-01.mp3"
+            }
+        ],
+        __initialWindowLayout: {
+            main: { position: { x: 900, y: 280 } },
+            equalizer: { position: { x: 900, y: 400 } },
+            playlist: { position: { x: -5000, y: -5000 }, closed: true }
         }
-    ],
-    __initialWindowLayout: {
-        playlist: { closed: true }
-    }
-});
+    });
     
     webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
-    console.log('Webamp loaded, attempting to position...');
-    
-    let attempts = 0;
-    const positionInterval = setInterval(() => {
-        const windows = document.querySelectorAll('.webamp .window, #webamp .window');
-        
-        console.log('Attempt', attempts, 'found', windows.length, 'windows');
-        
-        if (windows.length > 0) {
-            windows.forEach((win, index) => {
-                console.log('Positioning window', index);
-                
-                if (index === 0) {  // Main player
-                    win.style.left = '550px';
-                    win.style.top = '150px';
-                } 
-            });
-            
-            attempts++;
-            if (attempts > 10) {
-                clearInterval(positionInterval);
-            }
-        }
-    }, 100);
-});
+        // Show the player after a brief moment
+        setTimeout(() => {
+            document.getElementById('webamp').classList.add('positioned');
+        }, 200);
+    });
 </script>
 
 </body>
