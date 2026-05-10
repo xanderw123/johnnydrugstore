@@ -174,7 +174,6 @@
                         <p><a href="index.html">HOME</a></p>
                         <p><a href="live.html">LIVE</a></p>
                         <p class="current">PLAYER</p>
-                        <p><a href="support.html">SUPPORT</a></p>
                         <p><a href="store.html">STORE</a></p>
                         
                         <hr class="thin">
@@ -210,20 +209,6 @@
     </tr>
 </table>
 
-<style>
-    /* ... all your existing styles ... */
-    
-    /* Hide Webamp until it's positioned */
-    #webamp {
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    
-    #webamp.positioned {
-        opacity: 1;
-    }
-</style>
-
 <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
 
 <script>
@@ -239,20 +224,11 @@
                 },
                 url: "/audio/mix-01.mp3"
             }
-        ],
-        __initialWindowLayout: {
-            main: { position: { x: 550, y: 150 } },
-            equalizer: { position: { x: 550, y: 225 } },
-            playlist: { position: { x: -550, y: -300 }, closed: true }
-        }
+        ]
     });
     
-    webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
-        // Show the player after a brief moment
-        setTimeout(() => {
-            document.getElementById('webamp').classList.add('positioned');
-        }, 200);
-    });
+    // Render to body instead of the container
+    webamp.renderWhenReady(document.body);
 </script>
 
 </body>
