@@ -209,8 +209,8 @@
 
 <script>
     const webamp = new Webamp({
-       initialSkin: {
-    url: "/skins/XW_VIDEO_PLAYER_SKIN.wsz"
+        initialSkin: {
+            url: "/skins/XW_VIDEO_PLAYER_SKIN.wsz"
         },
         initialTracks: [
             {
@@ -219,13 +219,17 @@
                     title: "broadcast"
                 },
                 url: "/audio/mix-01.mp3"
-                // Add duration in seconds if you know it: duration: 5400
             }
         ],
         __initialWindowLayout: {
-            main: { position: { x: 500, y: 300 } },
-            equalizer: { position: { x: 0, y: 116 }, closed: true },
-            playlist: { position: { x: 0, y: 116 }, closed: true }
+            main: { 
+                position: { 
+                    x: window.innerWidth / 2 - 137,  // 275px player width / 2
+                    y: 200  // Adjust this to move it up/down
+                } 
+            },
+            equalizer: { position: { x: 0, y: 0 }, closed: true },
+            playlist: { position: { x: 0, y: 0 }, closed: true }
         }
     });
     
