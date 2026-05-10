@@ -115,9 +115,17 @@
             text-align: center;
         }
         
-        .player-container {
-            margin: 40px auto;
+        #webamp {
             display: inline-block;
+            margin: 40px auto;
+        }
+        
+        /* Center the Webamp windows */
+        #webamp > div {
+            position: relative !important;
+            margin: 0 auto !important;
+            left: auto !important;
+            top: auto !important;
         }
         
         .footer {
@@ -185,9 +193,7 @@
                     </td>
                     
                     <td class="main-content">
-                        <div class="player-container">
-                            <div id="webamp"></div>
-                        </div>
+                        <div id="webamp"></div>
                     </td>
                 </tr>
                 
@@ -204,7 +210,6 @@
     </tr>
 </table>
 
-<!-- Load Webamp -->
 <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
 
 <script>
@@ -220,12 +225,8 @@
                 },
                 url: "/audio/mix-01.mp3"
             }
-        ],
-        __initialWindowLayout: {
-            main: { position: { x: 600, y: 250 } },
-            equalizer: { position: { x: 600, y: 370 }, closed: true },
-            playlist: { position: { x: 600, y: 370 }, closed: true }
-        }
+        ]
+        // No __initialWindowLayout - let it position naturally
     });
     
     webamp.renderWhenReady(document.getElementById('webamp'));
