@@ -224,9 +224,12 @@
                     title: "broadcast"
                 },
                 url: "/audio/mix-01.mp3"
-            }
-        ]
-    });
+        }
+    ],
+    __initialWindowLayout: {
+        playlist: { closed: true }
+    }
+});
     
     webamp.renderWhenReady(document.getElementById('webamp')).then(() => {
     console.log('Webamp loaded, attempting to position...');
@@ -243,13 +246,13 @@
                 
                 if (index === 0) {  // Main player
                     win.style.left = '550px';
-                    win.style.top = '200px';
+                    win.style.top = '170px';
                 } else if (index === 1) {  // Equalizer
                     win.style.left = '550px';
-                    win.style.top = '215px';  
+                    win.style.top = '180px';  
                 } else if (index === 2) {  // Playlist
                     win.style.left = '550px';
-                    win.style.top = '230px';
+                    win.style.top = '180px';
                 }
             });
             
